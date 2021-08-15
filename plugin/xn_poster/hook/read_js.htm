@@ -1,0 +1,12 @@
+<script>
+var element = $('#xn_poster').detach();
+$('html').append(element);
+$('#ds_alipay').click(function(){
+	$('.ds_content img').attr("src","https://cdn.jsdelivr.net/gh/yalage/dadaoge@1.0/plugin/xn_poster/img/alipay.png");
+	$('#ds_wechat').attr('checked',false);
+});
+$('#ds_wechat').click(function(){
+	$('.ds_content img').attr("src","https://cdn.jsdelivr.net/gh/yalage/dadaoge@1.0/plugin/xn_poster/img/weipay.png");
+	$('#ds_alipay').attr('checked',false);
+});
+</script>

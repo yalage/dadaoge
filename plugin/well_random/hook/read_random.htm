@@ -1,0 +1,11 @@
+<?php if (isset($arrlist['randomlist']) && $randomlist = $arrlist['randomlist']){ ?>
+<div class="nowrap mt-3">
+    <div class="w-100 py-3">
+        <span class="pb-2 read-random" style="border-bottom:2px solid var(--persimmon-orange);"><?php echo lang('random'),lang('thread');?></span>
+    </div>
+
+    <?php foreach ($randomlist as $random) { ?>
+    <a href="<?php echo $random['url'];?>" class="col-6 col-md-4 float-left d-block ellipsis my-1" title="<?php echo $random['subject'];?>"><?php echo $random['subject'];?></a>
+    <?php } ?>
+</div>
+<?php } ?>

@@ -1,0 +1,12 @@
+{
+    "name": "list image / 列表多图",
+    "brief": "列表显示多图，仅后端代码，前端模板自行添加 html 代码。",
+    "type": "0",
+    "version": "1.0.0",
+    "software_version": "2.0.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

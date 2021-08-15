@@ -1,0 +1,28 @@
+<?php include INSTALL_PATH.'view/htm/header.inc.htm';?>
+<style>
+    #body,#form,.card{
+        height: 90%!important;
+    }
+    [name="lang"]{
+        height: 80%!important;
+    }
+</style>
+<div id="body" class="container">
+    <form action="index.php" method="post" id="form">
+        <div class="row vh-100">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-3 text-center"><img src="../view/img/logo.png" class="logo-2"></div>
+                        <h2 class="mb-3 text-center"> <?php echo lang('install_guide');?></h2>
+                        <?php echo $input['lang'];?>
+                    </div>
+                </div>
+                <div class="text-center m-3">
+                    <button type="submit" class="btn btn-primary" id="submit" data-loading-text="Loding...">Next (下一步)</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<?php include INSTALL_PATH.'view/htm/footer.inc.htm';?>

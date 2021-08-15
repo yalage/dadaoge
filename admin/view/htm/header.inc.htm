@@ -1,0 +1,152 @@
+<?php $header = GLOBALS('header');
+$conf= GLOBALS('conf');
+$user = GLOBALS('user');
+$gid = GLOBALS('gid');
+isset($user['avatar_url']) || $user['avatar_url'] = '';
+$menu = GLOBALS('menu');
+$forumlist_show = GLOBALS('forumlist_show');
+$route = GLOBALS('route');
+$action = GLOBALS('action');
+$config = GLOBALS('config');
+$static_version = $conf['static_version'];
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $conf['lang'];?>">
+<head>
+
+    <!--{hook admin_header_meta_before.htm}-->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="MobileOptimized" content="width" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="keywords" content="<?php echo strip_tags($header['keywords']);?>" />
+    <meta name="description" content="<?php echo strip_tags($header['description']);?>" />
+    <title><?php echo $header['title'];?></title>
+    <link rel="shortcut icon" href="../view/img/favicon.png" />
+    <link rel="icon" sizes="32x32" href="../view/img/favicon.png">
+    <link rel="Bookmark" href="../view/img/favicon.png" />
+
+    <!--{hook admin_header_css_start.htm}-->
+
+    <link rel="stylesheet" href="<?php echo admin_view_path();?>css/bootstrap.min.css<?php echo $static_version;?>">
+    <!--{hook admin_header_css_before.htm}-->
+    <link rel="stylesheet" href="<?php echo admin_view_path();?>css/font-awesome.min.css<?php echo $static_version;?>">
+    <!--{hook admin_header_css_after.htm}-->
+    <link rel="stylesheet" href="<?php echo admin_view_path();?>css/wellcms.css<?php echo $static_version;?>">
+    <!--{hook admin_header_css_end.htm}-->
+</head>
+
+<body>
+
+<!--{hook admin_header_inc_start.htm}-->
+
+<div class="media fixed-top">
+    <!-- LOGO -->
+    <a class="navbar-brand d-none d-lg-block logo text-center text-light my-2" href="./" style="width: 15.1rem;">YALAGE</a>
+
+    <header class="media-body navbar navbar-h navbar-expand shadow-sm navbar-dark bg-white linear-gradient-white-95">
+
+        <button id="but-sidebar-toggle" class="d-block d-lg-none bg-white border-0" type="button" aria-label="<?php echo lang('toggler_menu');?>">
+            <i class="icon-bars"></i>
+        </button>
+
+        <!--{hook admin_header_inc_before.htm}-->
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <!--{hook admin_header_inc_nav_start.htm}-->
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="avatar-2" src="<?php echo isset($user['avatar'])?admin_access_file($user['avatar'], $user['avatar_url']):'';?>">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right animated--fade-in-up shadow border-0 border-left-primary">
+                        <div class="dropdown-header d-flex justify-content-between">
+                            <img class="avatar-1" src="<?php echo admin_access_file($user['avatar'], $user['avatar_url']);?>">
+                            <span>
+                            <?php echo isset($user['username']) ? $user['username'] : '';?>
+                        </span>
+                        </div>
+                        <hr class="my-0">
+                        <!--{hook admin_header_user_start.htm}-->
+                        <a class="dropdown-item" href="<?php echo ($conf['url_rewrite_on'] < 2 ? '../' : ''),url('my', '', 2);?>">
+                            <i class="icon-user mr-2"></i>
+                            <?php echo lang('my_home');?>
+                        </a>
+                        <!--{hook admin_header_user_before.htm}-->
+                        <a class="dropdown-item" href="../">
+                            <i class="icon-home mr-2"></i>
+                            <?php echo lang('front_index_page');?>
+                        </a>
+                        <!--{hook admin_header_user_after.htm}-->
+                        <a id="user-logout" class="dropdown-item" href="<?php echo url('index-logout', '', TRUE);?>">
+                            <i class="icon-sign-out mr-2"></i>
+                            <?php echo lang('logout');?>
+                        </a>
+                        <!--{hook admin_header_user_end.htm}-->
+                    </div>
+                </li>
+
+                <!--{hook admin_header_inc_nav_after.htm}-->
+
+            </ul>
+        </div>
+
+        <!--{hook admin_header_inc_after.htm}-->
+
+    </header>
+</div>
+
+<!--{hook admin_header_inc_end.htm}-->
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <nav id="sidebar-toggle" class="wrapper-top navbar-dark bg-dark d-none d-lg-block shadow">
+        <!--{hook admin_header_nav_start.htm}-->
+        <ul class="navbar-nav flex-column sidebar" id="wellcms-nav">
+            <!--{hook admin_header_nav_start.htm}-->
+            <li class="nav-item">
+                <a class="nav-link home pr-2" href="./">
+                    <span class="mx-3">
+                        <i class="icon-home"></i>
+                    </span>
+                    <?php echo lang('admin_index_page');?>
+                </a>
+            </li>
+            <!--{hook admin_header_nav_before.htm}-->
+            <?php foreach ($menu as $k=>$v) { ?>
+            <li class="nav-item <?php echo $k;?>">
+                <a class="nav-link collapsed pr-2" data-toggle="collapse" data-target="#<?php echo $k;?>" aria-expanded="false" aria-controls="collapse" href="javascript:void(0);">
+                    <span class="menu-icon mx-3">
+                        <i class="<?php echo $v['icon'];?>"></i>
+                    </span>
+                    <?php echo $v['text'];?>
+                </a>
+                <div id="<?php echo $k;?>" class="collapse sidebar-menu-nested" aria-labelledby="heading" data-parent="#wellcms-nav">
+                    <ul class="navbar-nav flex-column">
+                        <?php foreach ($v['tab'] as $key=>$val) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link sub-menu menu-<?php echo $key;?>" href="<?php echo $val['url'];?>">
+                                <?php echo $val['text'];?>
+                            </a>
+                        </li>
+                        <?php  } ?>
+                    </ul>
+                </div>
+            </li>
+            <?php  } ?>
+            <!--{hook admin_header_nav_after.htm}-->
+        </ul>
+        <!--{hook admin_header_nav_end.htm}-->
+    </nav>
+
+    <div id="content-wrapper" class="wrapper-top d-flex flex-column">
+
+        <!-- Main Body -->
+        <div id="body" class="pt-3">

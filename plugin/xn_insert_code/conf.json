@@ -1,0 +1,30 @@
+{
+    "name": "插入代码",
+    "brief": "插入统计代码，页脚代码，广告代码。",
+    "type": "0",
+    "version": "1.00.02",
+    "software_version": "2.1.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": {
+        "footer_end.htm": -100,
+        "footer_footer_left_end.htm": -100,
+        "footer_footer_right_end.htm": -100,
+        "footer_start.htm": -100,
+        "index_flat_before.htm": -100,
+        "index_flat_main_start.htm": -100,
+        "index_flat_middle.htm": -100,
+        "index_flat_mod_before.htm": -100,
+        "list_main_start.htm": -100,
+        "list_site_brief_end.htm": -100,
+        "list_site_brief_start.htm": -100,
+        "list_thread_list_mod_before.htm": -100,
+        "read_item_right_end.htm": -100,
+        "read_item_right_start.htm": -100,
+        "read_main_breadcrumb_start.htm": -100,
+        "read_message_more_before.htm": -100,
+        "read_message_more_after.htm": -100
+    },
+    "overwrites_rank": [],
+    "dependencies": []
+}

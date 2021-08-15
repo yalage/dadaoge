@@ -1,0 +1,103 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<div class="row">
+	<div class="col-lg-6 mx-auto">
+		<div class="card">
+			<div class="card-header">
+				<?php echo lang('user_resetpw');?>
+			</div>
+			<div class="card-body">
+				<form action="<?php echo url('user-resetpw');?>" method="post" id="form">
+					<!--{hook user_resetpw_email_before.htm}-->
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="icon icon-envelope icon-fw"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="<?php echo lang('email');?>" name="email" id="email">
+						<div class="invalid-feedback"></div>
+					</div>
+					<!--{hook user_resetpw_email_after.htm}-->
+					
+					<!--{hook user_resetpw_verify_code_before.htm}-->
+					<div class="media">
+						<div class="media-body">
+							<div class="form-group input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="icon icon-key icon-fw"></i></span>
+								</div>
+								<input type="text" class="form-control" placeholder="<?php echo lang('verify_code');?>" name="code" id="code">
+							</div>
+						</div>
+						<div class="ml-1 mt-1">
+							<button type="submit" class="btn btn-primary btn-sm ml-3" id="send" data-loading-text="<?php echo lang('sending');?>...">
+								<?php echo lang('send_verify_code');?>
+							</button>
+						</div>
+					</div>
+					<!--{hook user_resetpw_verify_code_after.htm}-->
+					
+					<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..." <?php if($conf['user_create_email_on']) { ?>disabled<?php } ?>>
+                        <?php echo lang('next_step');?>
+                    </button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+var body = $('body');
+body.on('click', '#send', function() {
+	var jthis = $(this);
+	var jform = $('#form');
+    jform.reset();
+	jthis.button('loading');
+    var postdata = jform.serialize();
+    $.xpost(xn.url('user-send_code-user_resetpw'), postdata, function(code, message) {
+        if(code == 0) {
+            $.alert(message);
+            $('#code').focus();
+			jthis.button('<?php echo lang('user_send_successfully');?> 60 ');
+			$('button#submit').button('reset');
+            var t = 60; /*倒计时，重新发送*/
+            var handler = setInterval(function() {
+				jthis.button('<?php echo lang('user_send_successfully');?> '+(--t)+' ');
+                if(t == 0) {
+                    clearInterval(handler);
+					jthis.button('reset');
+                }
+            }, 1000);
+        } else if(code < 0) {
+            $.alert(message);
+			jthis.button('reset');
+        } else {
+            jform.find('[name="'+code+'"]').alert(message).focus();
+			jthis.button('reset');
+        }
+    });
+    return false;
+});
+
+body.on('submit', '#form', function() {
+    var jthis = $(this);
+    var jsubmit = jthis.find('#submit');
+	jthis.reset();
+	jsubmit.button('loading');
+	var postdata = jthis.serialize();
+	$.xpost(jthis.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$.alert(message);
+			jsubmit.button(message).delay(1000).location(xn.url('user-resetpw_complete'));
+		} else if(xn.is_number(code)) {
+			alert(message);
+			jsubmit.button('reset');
+		} else {
+			jthis.find('[name="'+code+'"]').alert(message).focus();
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+});
+</script>

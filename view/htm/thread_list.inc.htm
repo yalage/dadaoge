@@ -1,0 +1,128 @@
+<!--{hook thread__list_inc_start.htm}-->
+
+<?php if($threadlist) { foreach($threadlist as &$_thread) { ?>
+<li class="media thread tap" data-href="<?php echo $_thread['url']; ?>" tid="<?php echo $_thread['tid'];?>">
+
+    <?php if($_thread['allowtop']) { ?>
+    <div class="custom-control custom-checkbox ml-2">
+        <input class="custom-control-input" type="checkbox" id="modtid-<?php echo $_thread['tid']; ?>" name="modtid" value="<?php echo $_thread['tid']; ?>" />
+        <label class="custom-control-label custom-checkbox" for="modtid-<?php echo $_thread['tid']; ?>">
+        </label>
+    </div>
+    <?php } ?>
+
+    <div class="media-body">
+<?php if (isset($well_imagelist[$_thread['tid']]) && 2 < $images = count($well_imagelist[$_thread['tid']])) { ?>
+<div >
+<div class="focus">
+    <?php $i = 0; foreach($well_imagelist[$_thread['tid']] as $_image) { ?>
+
+    <?php if(++$i > 3) break; ?>
+
+    <div class="thread-image-list">
+        <a href="<?php echo $_thread['url']; ?>" <?php echo (10==$_thread['type']?'rel="nofollow" target="_blank"':''); ?>>
+        <img class="d-block w-100 rounded thumbnail" src="<?php echo $_image['icon_fmt'];?>" title="<?php echo $_thread['subject'];?>" alt="<?php echo $_thread['subject'];?>"/></a>
+    </div>
+    <?php } ?>
+</div>
+	<?php }else{ ?>
+			<div class="media">
+            <?php if ($_thread['icon']) { ?>
+            <div class="col-5 col-lg-4">
+                <a href="<?php echo $_thread['url']; ?>" <?php echo (10==$_thread['type']?'rel="nofollow" target="_blank"':''); ?>>
+                <img class="d-block w-100 rounded" src="<?php echo $_thread['icon_fmt'];?>" title='<?php echo $_thread['subject'];?>' alt='<?php echo $_thread['subject'];?>' />
+                    <!--{hook thread__list_inc_avatar_after.htm}-->
+                </a>
+            </div>
+            <?php } ?>
+<?php } ?>
+            <div class="media-body">
+                <!--{hook thread__list_inc_thread_start.htm}-->
+
+                <div class="col-lg-12 subject">
+
+                    <!--{hook thread__list_inc_sticky_before.htm}-->
+                    <?php if($_thread['sticky'] > 0) {?>
+                    <span class="mr-2 font-weight-bold badge badge-<?php echo $_thread['sticky_class'];?>">
+                        Sticky
+                    </span>
+                    <?php } ?>
+                    <!--{hook thread__list_inc_sticky_after.htm}-->
+
+                    <!--{hook thread__list_inc_closed_before.htm}-->
+                    <?php if($_thread['closed'] > 0) { ?>
+                    <span class="mr-2">
+                        <i class="icon-lock text-<?php echo 1==$_thread['closed']?'danger':'dark';?>"></i>
+                    </span>
+                    <?php } ?>
+                    <!--{hook thread__list_inc_closed_after.htm}-->
+                    <h2 class="h5 text-break font-weight-bold d-inline">
+                        <!--{hook thread__list_inc_subject_before.htm}-->
+                        <a href="<?php echo $_thread['url']; ?>" aria-label="<?php echo $_thread['subject'];?>" <?php echo (10==$_thread['type']?'rel="nofollow" target="_blank"':''); ?>>
+                        <?php echo $_thread['subject'];?>
+                        </a>
+                        <!--{hook thread__list_inc_subject_after.htm}-->
+                    </h2>
+                    <!--{hook thread__list_inc_subject__after.htm}-->
+                    <?php if($_thread['files'] > 0) { ?>
+                    &nbsp;<i class="icon small filetype other"></i>&nbsp;
+                    <?php } ?>
+                </div>
+
+                <!--{hook thread__list_inc_subject_end.htm}-->
+
+                <?php if($_thread['brief']){?>
+                <div class="col-lg-12 text-break text-muted brief mt-2">
+                    <?php echo $_thread['brief'];?>
+                </div>
+                <?php }?>
+
+                <!--{hook thread__list_inc_tag_before.htm}-->
+
+                <?php if($_thread['tag']){?>
+                <div class="tag col-lg-12 text-break small text-muted mt-3">
+                    <i class="icon-tags mr-2"></i>
+                    <?php foreach($_thread['tag_fmt'] as $key => $_tag) {?>
+                    <span class="mr-2">
+                        <strong class="mb-0">
+                            <a class="text-secondary" href="<?php echo url('tag-'.$key);?>">
+                                <?php echo $_tag;?>
+                            </a>
+                        </strong>
+                    </span>
+                    <?php }?>
+                </div>
+                <?php }?>
+
+                <!--{hook thread__list_inc_brief_after.htm}-->
+
+                <div class="col-lg-12 d-flex justify-content-between text-grey mt-2">
+                    <div class="d-flex text-muted small">
+
+                        <?php if($_thread['allowupdate']) { ?>
+                        <span class="mr-2">
+                            <a href="admin/<?php echo url('content-update', array('tid' => $_thread['tid']), TRUE); ?>" title="<?php echo lang('edit');?>"><i class="icon-edit text-muted"></i></a>
+                        </span>
+                        <!--{hook thread__list_inc_update.htm}-->
+                        <?php } ?>
+                        <?php if($_thread['allowdelete']) { ?>
+                        <!--<span class="mr-2">
+                            <a href="<?php echo url('operate-delete-' . $_thread['tid']);?>" title="<?php echo lang('delete');?>"><i class="icon-remove text-muted"></i></a>
+                        </span>-->
+                        <!--{hook thread__list_inc_delete.htm}-->
+                        <?php } ?>
+
+                    </div>
+                </div>
+
+                <!--{hook thread__list_inc_thread_end.htm}-->
+            </div>
+			</div>
+    </div>
+</li>
+<?php }} else { ?>
+<li class="thread mx-3">
+    <div><?php echo lang('none');?></div>
+</li>
+<?php } ?>
+<!--{hook thread__list_inc_end.htm}-->

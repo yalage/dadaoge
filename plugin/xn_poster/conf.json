@@ -1,0 +1,12 @@
+{
+    "name": "赞助",
+    "brief": "扫码赞助",
+    "type": "0",
+    "version": "1.00.02",
+    "software_version": "2.1.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

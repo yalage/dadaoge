@@ -1,0 +1,12 @@
+{
+    "name": "内容页随机主题",
+    "brief": "WellCMS 2.0 版，内容页随机主题。",
+    "type": "0",
+    "version": "1.0.02",
+    "software_version": "2.0.10",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

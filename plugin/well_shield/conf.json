@@ -1,0 +1,12 @@
+{
+    "name": "shield  / 过滤敏感词",
+    "brief": "shield sensitive words / IP / 过滤敏感词注册用户昵称、主题、主题内容、摘要、关键词、描述、tag、话题、关键词、描述",
+    "type": "0",
+    "version": "1.0.01",
+    "software_version": "2.1.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

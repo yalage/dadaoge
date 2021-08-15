@@ -1,0 +1,31 @@
+
+<script type="text/javascript">
+var tinymce_upload = xn.url('attach-create',{t:1,safe_token:safe_token});
+var tinymce_image_options = ''; /*{'is_image': 1, 'qulity': '0.75'}*/
+var t_external_toolbar_start = [], t_external_toolbar_end = [], t_external_toolbar = [], t_external_plugins = {};
+var tinymce_path = '<?php echo $conf['path'];?>';
+</script>
+<!--{hook huux_tinymce_post_js_before.htm}-->
+<script src="https://cdn.jsdelivr.net/gh/yalage/dadaoge@1.0/plugin/huux_tinymce/tinymce/tinymce.min.js<?php echo $static_version;?>"></script>
+<script src="https://cdn.jsdelivr.net/gh/yalage/dadaoge@1.0/plugin/huux_tinymce/tinymce/init.js<?php echo $static_version;?>"></script>
+<script type="text/javascript">
+$.require_css('https://cdn.jsdelivr.net/gh/yalage/dadaoge@1.0/plugin/huux_tinymce/tinymce/style.css');
+if (typeof jform != 'unefined') jform.find('[name="doctype"]').val(0);
+var xn_sbform = $('#message').parents('form'); /* 获取文本框message所在form表单 */
+xn_sbform.on('submit', function() { tinyMCE.editors['message'].save(); }); /* 给submit挂载同步事件 */
+var xn_sbdata = $._data(xn_sbform[0], 'events').submit; /* 获取form表单submit事件列表 */
+xn_sbdata.splice(0, 0, xn_sbdata.pop()); /* 把同步事件优先级设到最前 */
+$(window).scroll(function () {
+    var message_editor = $('#message').parent();
+    var editor_height = message_editor.height();
+    var editor_top = message_editor.offset().top;
+    if ($(window).scrollTop() > editor_top && $(window).scrollTop() < editor_height+50) {
+        var editor_width = message_editor.width();
+        $(".tox-editor-header").css({"position":"fixed","top":"0px","z-index":"1","width":editor_width-2});
+    } else {
+        $(".tox-editor-header").removeAttr("style");
+        $(".tox-editor-container").removeAttr("style");
+    }
+});
+</script>
+<!--{hook huux_tinymce_post_js_after.htm}-->

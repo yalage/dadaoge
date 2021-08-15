@@ -1,0 +1,78 @@
+<?php $conf = GLOBALS('conf');?>
+<?php $header = GLOBALS('header');?>
+<?php $user = GLOBALS('user');?>
+<?php $uid = GLOBALS('uid');?>
+<?php $gid = GLOBALS('gid');?>
+<?php $fid = GLOBALS('fid');?>
+<?php $tid = GLOBALS('tid');?>
+<?php $pid = GLOBALS('pid');?>
+<?php $route = GLOBALS('route');?>
+<?php $forumlist_show = GLOBALS('forumlist_show');?>
+<?php $forum_nav = GLOBALS('forum_nav');?>
+<?php $static_version = $conf['static_version'];?>
+<!--{hook header_start.htm}-->
+<!DOCTYPE html>
+<html lang="<?php echo $conf['lang'];?>">
+<head>
+	<?php echo defined('BASE_HREF') ? '<base href="'.BASE_HREF.'" />' : '' ;?>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--{hook header_meta_before.htm}-->
+	<link rel="canonical" href="<?php echo $header['mobile_link'];?>">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="<?php echo $header['title'];?> -">
+    <meta property="og:description" content="<?php echo $header['description'];?>">
+    <meta property="og:url" content="<?php echo $header['mobile_link'];?>">
+<?php if($route == 'read'){ ?>
+    <meta property="article:author" content="<?php echo $thread['username'];?>">
+    <meta property="og:image" content="<?php echo $thread['icon_fmt'];?>">
+<?php } ?>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta http-equiv="Cache-Control" content="no-transform">
+	<meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<meta name="referrer" content="origin-when-cross-origin">
+	<meta name="applicable-device" content="pc,mobile">
+	<meta name="MobileOptimized" content="width">
+	<meta name="HandheldFriendly" content="true">
+    <meta name="renderer" content="webkit">
+	<meta name="copyright" content="dadaoge.com">
+	<?php if(!empty($header['keywords'])) { ?>
+	<meta name="keywords" content="<?php echo $header['keywords'];?>">
+	<?php } ?>
+	<meta name="description" content="<?php echo $header['description'];?>">
+	<title><?php echo $header['title'];?> -</title>
+	<meta name="browsermode" content="application">
+	<meta name="x5-page-mode" content="app">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="<?php echo $conf['sitename'] ;?>">
+	<!--{hook header_link_before.htm}-->
+	
+	<link rel="shortcut icon" href="<?php echo view_path();?>img/favicon.png">
+	<link rel="icon" sizes="32x32" href="<?php echo view_path();?>img/favicon.png">
+	<link rel="Bookmark" href="<?php echo view_path();?>img/favicon.png">
+	
+	<!--{hook header_bootstrap_before.htm}-->
+	<?php $bootstrap_css = empty($bootstrap_css) ? view_path()."css/bootstrap.min.css".$static_version : $bootstrap_css;?>
+	<link rel="stylesheet" href="<?php echo $bootstrap_css;?>">
+
+	<!--{hook header_bootstrap_after.htm}-->
+
+	<link rel="stylesheet" href="<?php echo view_path();?>css/font-awesome.min.css<?php echo $static_version;?>">
+
+	<link rel="stylesheet" href="<?php echo view_path();?>css/wellcms.css<?php echo $static_version;?>">
+	<!--{hook header_link_after.htm}-->
+	
+</head>
+
+<body>
+
+	<!--{hook header_body_start.htm}-->
+    <!-- 此处加载导航栏 请先创建导航 -->
+	<?php include _include(APP_PATH.'view/htm/header_nav.inc.htm');?>
+
+	<div id="body">
+		<!-- 此处控制整页不溢出，如需宽度100%用 container-fluid 替换 container -->
+		<div class="container text-justify"><style type="text/css">.card-body{padding:1rem}.message p{padding:1rem 0}</style>
+	
+		<!--{hook body_start.htm}-->
