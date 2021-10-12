@@ -52,15 +52,6 @@
 	</script>
 	<script src="<?php echo view_path();?>js/wellcms.js<?php echo $static_version;?>"></script>
 
-<script src="<?php echo view_path();?>js/echo.min.js<?php echo $static_version;?>"></script>
-<script>
-    (function ($) {
-        path = "<?php echo $conf['path'];?>";
-        $("body img").each(function(k, v){var img = $("img").get(k).outerHTML;img = img.replace('src', 'data-echo');$(this).replaceWith(img);});
-    })(jQuery);
-    echo.init({offset: 100,throttle: 250,unload: false});
-</script>
-
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="javascript:void(0);">
 	<i class="icon-chevron-up"></i>

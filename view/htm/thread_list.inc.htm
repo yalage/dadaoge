@@ -12,33 +12,6 @@
     <?php } ?>
 
     <div class="media-body">
-<?php if (isset($well_imagelist[$_thread['tid']]) && 2 < $images = count($well_imagelist[$_thread['tid']])) { ?>
-<div >
-<div class="focus">
-    <?php $i = 0; foreach($well_imagelist[$_thread['tid']] as $_image) { ?>
-
-    <?php if(++$i > 3) break; ?>
-
-    <div class="thread-image-list">
-        <a href="<?php echo $_thread['url']; ?>" <?php echo (10==$_thread['type']?'rel="nofollow" target="_blank"':''); ?>>
-        <img class="d-block w-100 rounded thumbnail" src="<?php echo $_image['icon_fmt'];?>" title="<?php echo $_thread['subject'];?>" alt="<?php echo $_thread['subject'];?>"/></a>
-    </div>
-    <?php } ?>
-</div>
-	<?php }else{ ?>
-			<div class="media">
-            <?php if ($_thread['icon']) { ?>
-            <div class="col-5 col-lg-4">
-                <a href="<?php echo $_thread['url']; ?>" <?php echo (10==$_thread['type']?'rel="nofollow" target="_blank"':''); ?>>
-                <img class="d-block w-100 rounded" src="<?php echo $_thread['icon_fmt'];?>" title='<?php echo $_thread['subject'];?>' alt='<?php echo $_thread['subject'];?>' />
-                    <!--{hook thread__list_inc_avatar_after.htm}-->
-                </a>
-            </div>
-            <?php } ?>
-<?php } ?>
-            <div class="media-body">
-                <!--{hook thread__list_inc_thread_start.htm}-->
-
                 <div class="col-lg-12 subject">
 
                     <!--{hook thread__list_inc_sticky_before.htm}-->
@@ -68,6 +41,31 @@
                     &nbsp;<i class="icon small filetype other"></i>&nbsp;
                     <?php } ?>
                 </div>
+<?php if (isset($well_imagelist[$_thread['tid']]) && 6 < $images = count($well_imagelist[$_thread['tid']])) { ?>
+<div >
+<div class="focus">
+    <?php $i = 0; foreach($well_imagelist[$_thread['tid']] as $_image) { ?>
+    <?php if(++$i > 3) break; ?>
+
+    <div class="thread-image-list mt-2">
+        <a href="<?php echo $_thread['url']; ?>" <?php echo (10==$_thread['type']?'rel="nofollow" target="_blank"':''); ?>>
+        <img class="d-block w-100 rounded thumbnail" src="<?php echo $_image['icon_fmt'];?>" title="<?php echo $_thread['subject'];?>" alt="<?php echo $_thread['subject'];?>"/></a>
+    </div>
+    <?php } ?>
+</div>
+	<?php }else{ ?>
+			<div class="media">
+            <?php if ($_thread['icon']) { ?>
+            <div class="col-5 col-lg-4 mt-2">
+                <a href="<?php echo $_thread['url']; ?>" <?php echo (10==$_thread['type']?'rel="nofollow" target="_blank"':''); ?>>
+                <img class="d-block w-100 rounded" src="<?php echo $_thread['icon_fmt'];?>" title='<?php echo $_thread['subject'];?>' alt='<?php echo $_thread['subject'];?>' />
+                    <!--{hook thread__list_inc_avatar_after.htm}-->
+                </a>
+            </div>
+            <?php } ?>
+<?php } ?>
+            <div class="media-body">
+                <!--{hook thread__list_inc_thread_start.htm}-->
 
                 <!--{hook thread__list_inc_subject_end.htm}-->
 

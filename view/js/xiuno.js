@@ -571,8 +571,8 @@ xn.parse_url_param = function (url) {
  url_access = true后台链接 2后台调用前台链接 3不受限后台链接(不受过滤限制)
  */
 xn.url = function (u, extra, url_access) {
-    var on = window.url_rewrite_on || 0;
-    var url_access = url_access || window.url_access || false;
+    let on = window.url_rewrite_on || 0;
+    url_access = url_access || window.url_access || false;
 
     if (xn.strpos(u, '/') != -1) {
         var path = xn.substr(u, 0, xn.strrpos(u, '/') + 1);
@@ -588,20 +588,20 @@ xn.url = function (u, extra, url_access) {
     } else if (1 == on) {
         r = path + query + '.html';
     } else if (2 == on || 3 == on) {
-        var arr = xn.explode('-', u);
-        var url_filter = window.url_filter || ['operate', 'attach', 'read', 'category', 'list', 'my', 'forum', 'thread'];
+        var url_path = window.url_path || '/';
+        r = url_path + xn.str_replace('-', '/', query);
+        if (2 == on) r = r + '.html';
+    }
 
-        if ((true === url_access && false === xn.in_array(arr[0], url_filter)) || 3 === url_access) {
-            var str = '';
-            $.each(arr, function (k, v) {
-                str += '&' + k + '=' + v;
-            });
-            r = 'index.php?' + str.replace('&','');
-        } else {
-            var url_path = window.url_path || '/';
-            r = url_path + xn.str_replace('-', '/', query);
-            if (2 == on) r = r + '.html';
-        }
+    var arr = xn.explode('-', query);
+    var url_filter = window.url_filter || ['operate', 'attach', 'read', 'category', 'list', 'my', 'forum', 'thread'];
+
+    if ((true === url_access && false === xn.in_array(arr[0], url_filter)) || 3 === url_access) {
+        var str = '';
+        $.each(arr, function (k, v) {
+            str += '&' + k + '=' + v;
+        });
+        r = 'index.php?' + str.replace('&','');
     }
 
     if(2 === url_access && 2 > on) r = '../' + r;
@@ -1292,7 +1292,7 @@ xn.image_resize = function (file_base64_data, callback, options) {
     var thumb_height = options.height || 4960;
     var action = options.action || 'thumb';
     var filetype = options.filetype || xn.image_file_type(file_base64_data);/*xn.base64_data_image_type(file_base64_data);*/
-    var qulity = options.qulity || 0.9; /*图片质量, 1 为无损*/
+    var qulity = options.qulity || 0.75; /*图片质量, 1 为无损*/
 
     if (thumb_width < 1) return callback(-1, '缩略图宽度不能小于 1 / thumb image width length is less 1 pix');
     if (xn.substr(file_base64_data, 0, 10) != 'data:image') return callback(-1, '传入的 base64 数据有问题 / deformed base64 data');
