@@ -4,7 +4,6 @@
 <?php $ip = GLOBALS('ip');?>
 <?php $useragent = GLOBALS('useragent');?>
 <?php $forumlist = GLOBALS('forumlist');?>
-<?php $forumarr = GLOBALS('forumarr');?>
 <?php $fid = GLOBALS('fid');?>
 <?php $conf = GLOBALS('conf');?>
 <?php $config = GLOBALS('config');?>
@@ -45,20 +44,30 @@
 	var debug = DEBUG = <?php echo DEBUG; ?>;
 	var url_rewrite_on = <?php echo $conf['url_rewrite_on'];?>;
 	var url_path = '<?php echo $conf['path'];?>';
-	var forumarr = <?php echo xn_json_encode($forumarr);?>;
 	var fid = <?php echo $fid;?>;
 	var uid = <?php echo intval($uid);?>;
 	var gid = <?php echo intval($gid);?>;
+	xn.options.water_image_url = '<?php echo view_path(),$conf['logo_water_url'];?>';	/*水印图片 / watermark image*/
 	</script>
 	<script src="<?php echo view_path();?>js/wellcms.js<?php echo $static_version;?>"></script>
 
+<!--图片赖加载需要的自己删掉注释
+<script src="<?php echo view_path();?>js/echo.min.js<?php echo $static_version;?>"></script>
+<script>
+    (function ($) {
+        path = "<?php echo $conf['path'];?>";
+        $("body img").each(function(k, v){var img = $("img").get(k).outerHTML;img = img.replace('src', 'data-echo');$(this).replaceWith(img);});
+    })(jQuery);
+    echo.init({offset: 100,throttle: 250,unload: false});
+</script>
+-->
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="javascript:void(0);">
-	<i class="icon-chevron-up"></i>
+	<i class="icon-angle-up"></i>
 </a>
 <!-- Scroll to bottom Button-->
 <a class="scroll-to-bottom rounded" href="javascript:void(0);" style="display: inline;">
-	<i class="icon-chevron-down"></i>
+	<i class="icon-angle-down"></i>
 </a>
 	<!--{hook footer_js_after.htm}-->
 

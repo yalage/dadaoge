@@ -69,12 +69,7 @@
                                     <!--{hook admin_thread_post_inc_thumbnail_after.htm}-->
 
                                     <!--{hook admin_thread_post_inc_delete_before.htm}-->
-                                    <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" type="checkbox" id="delete_pic-box" name="delete_pic" value="1" />
-                                        <label class="custom-control-label custom-checkbox mr-1" for="delete_pic-box">
-                                            <?php echo lang('delete_thumbnail');?>
-                                        </label>
-                                    </div>
+                                    <a class="btn btn-outline-danger btn-sm" id="thumbnail-delete" href="javascript:void(0);" data-href="<?php echo $form_thumbnailDelete; ?>"><?php echo lang('delete');?></a>
                                     <!--{hook admin_thread_post_inc_delete_after.htm}-->
 
                                 </div>
@@ -126,7 +121,7 @@
                                         </span>
                                         <?php }} ?>
                                         <div class="tag-wrap">
-                                            <input id="tag-input" type="text" class="form-control tag-input text-small btn-sm my-1" placeholder="<?php echo lang('spatial_segmentation');?> tag" title="<?php echo lang('spatial_segmentation');?> tag" name="tag-input" value="" style="width: 90px">
+                                            <input id="tag-input" type="text" class="form-control tag-input text-small btn-sm my-1" placeholder="Tag<?php echo lang('spatial_segmentation');?>" title="Tag<?php echo lang('spatial_segmentation');?>" name="tag-input" value="" style="width: 90px">
                                         </div>
                                         <input class="tags-val" type="hidden" name="tags" id="tags" value="<?php echo $tagstr;?>" />
                                     </div>

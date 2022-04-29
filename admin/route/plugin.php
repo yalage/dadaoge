@@ -99,6 +99,9 @@ switch ($action) {
         }
         break;
 
+
+
+
     case 'install':
         $safe_token = param('safe_token');
         FALSE === well_token_verify($uid, $safe_token) and message(1, lang('illegal_operation'));
@@ -213,9 +216,10 @@ switch ($action) {
         message(0, jump($msg, url('plugin-read', array('dir' => $dir), TRUE), 3));
         break;
 
+
     case 'setting':
-        $dir = param_word('dir');
-        empty($dir) and $dir = param_word(2); // 兼容旧插件
+        $dir = param('dir');
+        empty($dir) and $dir = param(2); // 兼容旧插件
         plugin_check_exists($dir);
         $name = $plugins[$dir]['name'];
 
@@ -262,7 +266,7 @@ function plugin_check_exists($dir, $local = TRUE)
     global $plugins, $themes;
     !is_word($dir) and message(-1, lang('plugin_name_error'));
     if ($local) {
-        empty($plugins[$dir]) and !isset($themes[$dir]) and message(-1, lang('plugin_not_exists'));
+        empty($plugins[$dir]) && !isset($themes[$dir]) and message(-1, lang('plugin_not_exists'));
     }
 }
 
@@ -271,7 +275,7 @@ function plugin_cate_active($action, $arr, $type, $page)
     $s = '';
     foreach ($arr as $_type => $name) {
         $url = url('plugin-' . $action, array('type' => $_type, 'page' => $page), TRUE);
-        $s .= '<a role="button" class="btn btn btn-secondary' . ($type == $_type ? ' active' : '') . '" href="' . $url . '">' . $name . '</a>';
+        $s .= '<a role="button" class="btn btn-secondary' . ($type == $_type ? ' active' : '') . '" href="' . $url . '">' . $name . '</a>';
     }
     return $s;
 }
@@ -294,7 +298,7 @@ function theme_install($dir)
 
     $dir = trim($dir);
     if (!empty($config['theme']) && $config['theme'] != $dir) {
-        is_file(APP_PATH . 'view/template/' . $dir.'/conf.json') and theme_uninstall($config['theme']);
+        is_file(APP_PATH . 'view/template/' . $dir . '/conf.json') and theme_uninstall($config['theme']);
     }
 
     $path = APP_PATH . 'view/template/' . $dir;

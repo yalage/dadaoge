@@ -82,7 +82,7 @@
             s += '<p class="tag-outline-list">';
             $.each(fup.flagstr_fmt, function(k, flag) {
                 s += '<a href="javascript:void(0);" class="btn btn-outline-secondary btn-sm mr-3 mb-2 flag-option ' + (xn.in_array(flag.flagid, category_flagids) ? 'active' : '') + '" flagid="' + flag.flagid + '">' + flag.name + '</a>';
-                s += '<input type="hidden" name="category[]" value="' + (xn.in_array(flag.flagid, category_flagids)) + '" />';
+                s += '<input type="hidden" name="category[]" value="' + (xn.in_array(flag.flagid, category_flagids) ? flag.flagid : '') + '" />';
             });
             s += '</p>';
         }
@@ -305,6 +305,18 @@
     if ($(document.body).width() < 992) {
         $('#nav-show').css({"position": "fixed", "top": "0", "bottom": "0", "right": "0", "margin-top": "3.625rem", "z-index": "1032"});
     }
+
+    document.getElementById('thumbnail-delete').addEventListener('click', function (e) {
+        let url = this.getAttribute('data-href');
+        $.xget(url, function (code, message) {
+            if (0 == code) {
+                document.querySelector('.img-thumbnail').setAttribute('src', message.thumbnail);
+            } else {
+                $.alert(message.message);
+            }
+        });
+        e.stopPropagation();
+    });
 
     $('#content').addClass('show');
     $('li.<?php echo $route;?>').addClass('active');

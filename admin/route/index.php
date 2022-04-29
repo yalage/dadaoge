@@ -47,7 +47,7 @@ if ('login' == $action) {
 
     admin_token_clean();
 
-    message(0, jump(lang('logout_successfully'), './'));
+    message(0, jump(lang('logout_successfully'), $conf['path']));
 
 } elseif ('phpinfo' == $action) {
 

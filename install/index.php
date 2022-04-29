@@ -171,7 +171,8 @@ if (empty($action)) {
         $replace['db'] = $conf['db'];
         $replace['cache'] = $conf['cache'];
         $replace['cookie_pre'] = $tablepre;
-        $replace['auth_key'] = xn_rand(64);
+        $rand = xn_rand(64);
+        $replace['auth_key'] = $rand;
         $replace['installed'] = 1;
         $replace['lang'] = $_lang;
         file_replace_var(APP_PATH . 'conf/conf.php', $replace);
@@ -196,9 +197,9 @@ if (empty($action)) {
         db_update('user', array('uid' => 1), $update);
 
         xn_mkdir(APP_PATH . 'upload/tmp', 0777);
-        xn_mkdir(APP_PATH . 'upload/attach', 0777);
+        xn_mkdir(APP_PATH . 'upload/website_attach', 0777);
+        xn_mkdir(APP_PATH . 'upload/thumbnail', 0777);
         xn_mkdir(APP_PATH . 'upload/avatar', 0777);
-        xn_mkdir(APP_PATH . 'upload/forum', 0777);
         xn_mkdir(APP_PATH . 'view/template', 0777);
 
         file_put_contents(APP_PATH . 'install/install.lock', date('Y-m-d H:i:s'));

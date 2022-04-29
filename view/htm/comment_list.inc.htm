@@ -4,6 +4,7 @@
 					<li class="row <?php echo $_post['classname'];?>" data-pid="<?php echo $_post['pid'];?>" data-uid="<?php echo $_post['uid'];?>">
                         <div class="col-lg-12 d-flex justify-content-between text-muted my-2">
 
+
                             <div>
                                 <!--{hook comment_list_inc_quote_before.htm}-->
                                 <?php if($allowpost) { ?>
@@ -35,7 +36,7 @@
                         <div class="col-lg-12 message my-2 text-break">
 
                             <!--{hook comment_list_inc_subject_before.htm}-->
-                            <?php if('read' != $route && !empty($_post['subject'])) {?>
+                            <?php if(!isset($thread) && !empty($_post['subject'])) {?>
                             <h6 class="h6 text-break font-weight-bold">
                                 <a href="<?php echo $_post['url'];?>" target="_blank">
                                     <?php echo $_post['subject'];?>
